@@ -3,9 +3,6 @@ class Node:
     def __init__(self, value):
         self.value = value # Stored data
         self.next = None # Initialize pointer to the next node as None
-    
-    def __repr__(self):
-        return f"[{self.value}|{self.next}]"
 
 class SinglyLinkedList:
     """A class representing a singly linked list."""
@@ -36,6 +33,17 @@ class SinglyLinkedList:
             self.tail.next = new_node  # Update the current tail's next pointer
             self.tail = new_node  # Move the tail to the new node
         self.length+=1
+    
+    def __repr__(self):
+        """Provides a string representation of the linked list."""
+        nodes = []
+        current = self.head
+        while current: # Traverse the Linked List 
+            nodes.append(str(current.value)) # Add the data to the list
+            current = current.next
+        return " -> ".join(nodes) if nodes else "Empty Linked List"
+    
+            
 
 if __name__=="__main__":
     # Create a node 
@@ -62,3 +70,6 @@ if __name__=="__main__":
     print(sll.head.value)  # Output: 5
     print(sll.head.next.value)  # Output: 10
     print(sll.tail.value)  # Output: 10
+
+    # View the Linked List
+    print(sll)
