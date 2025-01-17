@@ -22,6 +22,20 @@ class SinglyLinkedList:
             self.head = new_node
             self.tail = new_node
             self.length = 1
+    
+    def append(self, value):
+        """
+        Adds a new node with the given value to the end of the list.
+        Handles the edge case when the list is empty.
+        """
+        new_node = Node(value)  # Create a new node
+        if self.head is None:  # Edge case: list is empty
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.tail.next = new_node  # Update the current tail's next pointer
+            self.tail = new_node  # Move the tail to the new node
+        self.length+=1
 
 if __name__=="__main__":
     # Create a node 
@@ -38,3 +52,13 @@ if __name__=="__main__":
     print(list2.head.value)  # Output: 10
     print(list2.tail.value)  # Output: 10
 
+    # Creating an empty linked list
+    sll = SinglyLinkedList()
+    sll.append(5)  # Appending to an empty list
+    print(sll.head.value)  # Output: 5
+    print(sll.tail.value)  # Output: 5
+
+    sll.append(10)  # Appending another value
+    print(sll.head.value)  # Output: 5
+    print(sll.head.next.value)  # Output: 10
+    print(sll.tail.value)  # Output: 10
