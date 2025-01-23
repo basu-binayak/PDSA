@@ -117,6 +117,63 @@ class SinglyLinkedList:
             print(current.value, end=" -> " if current.next else "\n")
             current = current.next
     
+    def search(self, value):
+        """
+        Searches for a node with the given value and returns its index.
+        If the value is not found, returns -1.
+        """
+        current = self.head
+        index = 0
+
+        while current:
+            if current.value == value:
+                return index  # Value found, return its index
+            current = current.next
+            index += 1
+
+        return -1  # Value not found
+    
+    def get(self, index):
+        """
+        Retrieves the value of the node at the given index.
+        If the index is invalid, returns None.
+        """
+        if index < 0:
+            return None  # Negative indices are invalid
+
+        current = self.head
+        current_index = 0
+
+        while current:
+            if current_index == index:
+                return current.value  # Node found, return its data
+            current = current.next
+            current_index += 1
+
+        return None  # Index is out of bounds
+    
+    def set(self, index, value):
+        """
+        Updates the value of the node at the given index.
+        If the index is invalid, returns False.
+        Otherwise, updates the node and returns True.
+        """
+        if index < 0:
+            return False  # Negative indices are invalid
+
+        current = self.head
+        current_index = 0
+
+        while current:
+            if current_index == index:
+                current.value = value  # Node found, update its value
+                return True
+            current = current.next
+            current_index += 1
+
+        return False  # Index is out of bounds
+
+
     
     
 if __name__=="__main__":
@@ -159,6 +216,7 @@ if __name__=="__main__":
     sll.prepend(30)
     print(sll)  # Output: 30 -> 20 -> 10
     
+    # insert_at_position
     sll.insert_at_position(23,0)
     print(sll)
     
@@ -174,4 +232,16 @@ if __name__=="__main__":
     sll.insert_at_position(35,-1)
     print(sll)
     
+    # traverse
     sll.traverse()
+    
+    # search
+    print(sll.search(34))
+    
+    # get and set
+    print(sll.get(6))
+
+    sll.set(6, 100)
+    print(sll)
+    
+    
