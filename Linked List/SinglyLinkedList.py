@@ -52,10 +52,58 @@ class SinglyLinkedList:
         else:
             new_node.next = self.head  # Point the new node to the current head
             self.head = new_node  # Update the head to the new node
+        self.length+=1
     
-    
-            
+    def insert_at_position(self, value, position):
+        """
+        Inserts a new node with the given value at the specified position.
+        Positions are 0-based, where 0 is the beginning of the list. To append to the end give position as -1
+        """
+        if position<0 and position!=-1:
+            raise ValueError("Position must be a non-negative integer!")
+        
+        new_node = Node(value=value)
+        
+        # prepend
+        if position==0:
+            self.prepend(value)
+            return
+        # append
+        if position==-1:
+            self.append(value)
+            return
+        
+        
+        # at any other position
+        current = self.head
+        count = 0
+        
+        if self.head is None:
+            self.head = new_node
+            self.tail = new_node
+        
+        else:
+            # Traverse to the node just before the desired position
+            while current and count < position - 1:
+                current = current.next
+                count += 1
 
+            if not current:  # If position is out of bounds
+                raise ValueError("Position out of bounds.")
+
+            # Insert the new node at the specified position
+            new_node.next = current.next
+            current.next = new_node
+            
+            # if the user provides the last index insted of -1 
+            if new_node.next is None:
+                self.tail = new_node
+        
+        # Increase length 
+        self.length+=1
+        
+        
+    
 if __name__=="__main__":
     # Create a node 
     node = Node(20)
@@ -95,3 +143,18 @@ if __name__=="__main__":
 
     sll.prepend(30)
     print(sll)  # Output: 30 -> 20 -> 10
+    
+    sll.insert_at_position(23,0)
+    print(sll)
+    
+    sll.insert_at_position(232,1)
+    print(sll)
+    
+    sll.insert_at_position(223,3)
+    print(sll)
+    
+    sll.insert_at_position(34,sll.length)
+    print(sll)
+    
+    sll.insert_at_position(35,-1)
+    print(sll)
