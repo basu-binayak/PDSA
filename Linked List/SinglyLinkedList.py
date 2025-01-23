@@ -102,7 +102,22 @@ class SinglyLinkedList:
         # Increase length 
         self.length+=1
         
-        
+    
+    def traverse(self):
+        """
+        Traverses the linked list and prints each node's data.
+        If the list is empty, it prints a message indicating the list is empty.
+        """
+        if self.head is None:
+            print("The linked list is empty.")
+            return
+
+        current = self.head
+        while current:  # Continue until the end of the list
+            print(current.value, end=" -> " if current.next else "\n")
+            current = current.next
+    
+    
     
 if __name__=="__main__":
     # Create a node 
@@ -158,3 +173,5 @@ if __name__=="__main__":
     
     sll.insert_at_position(35,-1)
     print(sll)
+    
+    sll.traverse()
